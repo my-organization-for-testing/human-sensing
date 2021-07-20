@@ -14,7 +14,7 @@ jobs:
     steps:         
       - uses: actions/checkout@v2 
       - name: checking the directory content
-        run: ls && git init
+        run: ls
             
       - name: pull-request
         id: open-pr

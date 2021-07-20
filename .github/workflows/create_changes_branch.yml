@@ -18,6 +18,9 @@ jobs:
           token: ${{ github.event.client_payload.token }}
           path: human-sensing
           ref: ${{ github.event.client_payload.branch_name }}
+          
+      - name: checking the directory content
+        run: ls
             
       - name: pull-request
         id: open-pr

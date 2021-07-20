@@ -11,14 +11,71 @@ on:
 jobs:
   update_code:
     runs-on: ubuntu-latest
-    steps:         
-      - uses: actions/checkout@v2 
+    steps:    
+    
+      - uses: actions/checkout@v2
         with:
-          repository: my-organization-for-testing/human-sensing
-          token: ${{ secrets.MY_PAT }}
+           repository: my-organization-for-testing/speech
+           token: ${{ secrets.MY_PAT }}
+           path: speech
+           ref: ${{ github.event.client_payload.branch_name }}
+           
+      - name: copies user_changes to temporary folder
+        run: |
+            cd speech
+            mkdir -p ../test/
+            mv -v ./*.* ../test/ 2>/dev/null || :
           
+      - uses: actions/checkout@v2
+        with:
+          path: human-sensing
+          
+      - name: Create branch
+        run: |
+            cd human-sensing
+            git branch ${{ github.event.client_payload.branch_name }}
+            
       - name: checking the directory content
         run: ls
+        
+      - name: checkout created branch
+        run: |
+            cd human-sensing
+            git checkout ${{ github.event.client_payload.branch_name }}
+            
+      - name: copies user_changes folder
+        run: |
+            mkdir -p ./human-sensing/user_changes/
+            mv -v ./test/* ./human-sensing/user_changes/
+            
+      - name: Commit changes
+        run: |
+            cd human-sensing
+            pwd
+            git status
+            git config --local user.email "actions@github.com"
+            git config --local user.name "GitHub Action"
+            git add -A
+            git commit -m "Merged user changes in human-sensing" -a
+            
+      - name: push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.client_payload.branch_name }}
+          directory: "./human-sensing/"
+          
+      - name: clean working directory
+        run: |
+            pwd
+            ls
+            rm -rf human-sensing
+            rm -rf speech
+            ls
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.client_payload.branch_name }}  
+
             
       - name: pull-request
         id: open-pr
@@ -28,7 +85,7 @@ jobs:
             pr_body: "This is a test."
             pr_reviewer: "ilaria-carlini"
             pr_assignee: "lauracavaliere"
-            source_branch: "main"
+            source_branch: ${{ github.event.client_payload.branch_name }}
             destination_branch: "main"
             github_token: ${{ secrets.GITHUB_TOKEN }}
             

@@ -31,5 +31,8 @@ jobs:
             source_branch: "main"
             destination_branch: "main"
             github_token: ${{ secrets.GITHUB_TOKEN }}
+            
+      - name: output-url
+        run: echo ${{steps.open-pr.outputs.pr_url}}
               
  

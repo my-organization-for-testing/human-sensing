@@ -25,6 +25,7 @@ jobs:
             pr_reviewer: "ilaria-carlini"
             pr_assignee: "lauracavaliere"
             source_branch: "main"
+            destination_branch: "main"
             github_token: ${{ secrets.GITHUB_TOKEN }}
               
  

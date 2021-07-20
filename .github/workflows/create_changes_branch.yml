@@ -14,7 +14,7 @@ jobs:
     steps:         
       - uses: actions/checkout@v2 
       - name: checking the directory content
-        run: cd human-sensing && ls && git init
+        run: ls && git init
             
       - name: pull-request
         id: open-pr

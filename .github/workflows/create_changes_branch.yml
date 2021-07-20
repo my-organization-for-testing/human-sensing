@@ -1,0 +1,26 @@
+name: Creating changes branch
+
+on: 
+    repository_dispatch:
+        types: [user_changes]
+
+
+#            mv -v ./appsAway/user_changes/* ./icub-tech-apps/dist/database/upgrade/
+#            mv -v ./appsAway/user_changes/images/* ./icub-tech-apps/dist/express/images/
+
+jobs:
+  update_code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull-request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+            pr_title: "Adding user changes into the website."
+            pr_body: "This is a test."
+            pr_reviewer: "ilaria-carlini"
+            pr_assignee: "lauracavaliere"
+            source_branch: "master"
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+              
+ 

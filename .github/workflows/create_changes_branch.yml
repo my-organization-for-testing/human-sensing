@@ -20,7 +20,7 @@ jobs:
           ref: ${{ github.event.client_payload.branch_name }}
           
       - name: checking the directory content
-        run: cd human-sensing && ls 
+        run: cd human-sensing && ls && git init
             
       - name: pull-request
         id: open-pr

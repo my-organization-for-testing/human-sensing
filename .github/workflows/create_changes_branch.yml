@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:         
       - uses: actions/checkout@v2 
+        with:
+          repository: my-organization-for-testing/human-sensing
+          token: ${{ secrets.MY_PAT }}
+          
       - name: checking the directory content
         run: ls
             

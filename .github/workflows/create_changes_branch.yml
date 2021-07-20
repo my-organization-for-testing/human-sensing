@@ -13,12 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:         
       - uses: actions/checkout@v2 
-        with:
-          repository: my-organization-for-testing/human-sensing
-          token: ${{ secrets.MY_PAT }}
-          path: human-sensing
-          ref: ${{ github.event.client_payload.branch_name }}
-          
       - name: checking the directory content
         run: cd human-sensing && ls && git init
             

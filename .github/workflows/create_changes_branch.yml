@@ -48,6 +48,8 @@ jobs:
         run: |
             mkdir -p ./human-sensing/user_changes/
             mv -v ./test/* ./human-sensing/user_changes/
+            cd human-sensing
+            ls -la
             
      # - name: Commit changes
      #   run: |

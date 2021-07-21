@@ -26,9 +26,6 @@ jobs:
             mkdir -p ../test/
             mv -v ./*.* ../test/ 2>/dev/null || :
             
-            mv ../test/ $GITHUB_WORKSPACE/test/
-            rm -rf ../speech/
-
       - uses: actions/checkout@v2
    
       - name: checking the directory content
@@ -42,7 +39,7 @@ jobs:
       - name: copies user_changes folder
         run: |
             mkdir -p ./user_changes/
-            mv -v $GITHUB_WORKSPACE/test/ ./user_changes/
+            touch ./user_changes/text.txt
             ls -la
             
      # - name: Commit changes

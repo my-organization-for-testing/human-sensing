@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: before checkout
         run: |
-          ls -la /home/runner/human-sensing/
+          ls -la /home/runner/
   
       - uses: actions/checkout@v2
           

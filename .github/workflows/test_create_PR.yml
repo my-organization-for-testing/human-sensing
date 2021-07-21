@@ -7,17 +7,19 @@ jobs:
   update_code:
     runs-on: ubuntu-latest
     steps:
-    
+      - name: before checkout
+        run: |
+          ls -la /home/runner/human-sensing/
   
       - uses: actions/checkout@v2
           
     
             
       - name: create user changes
-        run: |
-            ls -la
-            touch test.txt
-            ls -la
+        run: ls -la /home/runner/human-sensing/
+      #      ls -la
+      #      touch test.txt
+             
             
       - name: pull-request
         id: open-pr

@@ -83,7 +83,7 @@ jobs:
         id: open-pr
         uses: peter-evans/create-pull-request@v3
         with:
-            base: "main"
+            base: main
             branch: ${{ github.event.client_payload.branch_name }}
             title: '[Example] Update report'
             body: |

@@ -31,51 +31,51 @@ jobs:
         with:
           path: human-sensing
           
-      - name: Create branch
-        run: |
-            cd human-sensing
-            git branch ${{ github.event.client_payload.branch_name }}
+     # - name: Create branch
+     #   run: |
+     #       cd human-sensing
+     #       git branch ${{ github.event.client_payload.branch_name }}
             
-      - name: checking the directory content
-        run: ls
+     # - name: checking the directory content
+     #   run: ls
         
-      - name: checkout created branch
-        run: |
-            cd human-sensing
-            git checkout ${{ github.event.client_payload.branch_name }}
+     # - name: checkout created branch
+     #   run: |
+     #       cd human-sensing
+     #       git checkout ${{ github.event.client_payload.branch_name }}
             
       - name: copies user_changes folder
         run: |
             mkdir -p ./human-sensing/user_changes/
             mv -v ./test/* ./human-sensing/user_changes/
             
-      - name: Commit changes
-        run: |
-            cd human-sensing
-            pwd
-            git status
-            git config --local user.email "actions@github.com"
-            git config --local user.name "GitHub Action"
-            git add user_changes/
-            git commit -m "Merged user changes in human-sensing" -a
+     # - name: Commit changes
+     #   run: |
+     #       cd human-sensing
+     #       pwd
+     #       git status
+     #       git config --local user.email "actions@github.com"
+     #       git config --local user.name "GitHub Action"
+     #       git add user_changes/
+     #       git commit -m "Merged user changes in human-sensing" -a
             
-      - name: push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.event.client_payload.branch_name }}
-          directory: "./human-sensing/"
+     # - name: push changes
+     #   uses: ad-m/github-push-action@master
+     #   with:
+     #     github_token: ${{ secrets.GITHUB_TOKEN }}
+     #     branch: ${{ github.event.client_payload.branch_name }}
+     #     directory: "./human-sensing/"
           
-      - name: clean working directory
-        run: |
-            pwd
-            ls
-            rm -rf human-sensing
-            rm -rf speech
-            ls
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.client_payload.branch_name }}  
+     # - name: clean working directory
+     #   run: |
+     #       pwd
+     #       ls
+     #       rm -rf human-sensing
+     #       rm -rf speech
+     #       ls
+     # - uses: actions/checkout@v2
+     #   with:
+     #     ref: ${{ github.event.client_payload.branch_name }}  
      
       - name: pull-request
         id: open-pr

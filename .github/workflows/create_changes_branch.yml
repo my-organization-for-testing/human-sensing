@@ -75,20 +75,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.client_payload.branch_name }}  
-
-      - name: Get Token
-        id: get_workflow_token
-        uses: tibdex/github-app-token@v1
-        with:
-          private_key: ${{ secrets.ANOTHER_PRIVATE_KEY }}
-          app_id: ${{ secrets.ANOTHER_APP_ID }}
-          repository: my-organization-for-testing/human-sensing
      
       - name: pull-request
         id: open-pr
         uses: repo-sync/pull-request@v2
-        env:
-           GITHUB_APPS_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         with:
             pr_title: "Adding user changes into the website."
             pr_body: "This is a test."
@@ -96,7 +86,7 @@ jobs:
             pr_assignee: "lauracavaliere"
             source_branch: ${{ github.event.client_payload.branch_name }}
             destination_branch: "main"
-            github_token: ${{ env.GITHUB_APPS_TOKEN }}
+            github_token: ${{ secrets.GITHUB_TOKEN }}
             
       - name: output-url
         run: echo ${{steps.open-pr.outputs.pr_url}}

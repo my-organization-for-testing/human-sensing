@@ -12,6 +12,8 @@ jobs:
           ls -la /home/runner/work/human-sensing/human-sensing/
   
       - uses: actions/checkout@v2
+        with:
+          path: human-sensing
           
     
             

@@ -31,13 +31,13 @@ jobs:
         with:
           path: human-sensing
           
-     # - name: Create branch
-     #   run: |
-     #       cd human-sensing
+      - name: Create branch
+        run: |
+            cd human-sensing
      #       git branch ${{ github.event.client_payload.branch_name }}
             
-     # - name: checking the directory content
-     #   run: ls
+      - name: checking the directory content
+        run: ls
         
      # - name: checkout created branch
      #   run: |

@@ -9,14 +9,15 @@ jobs:
     steps:
       - name: before checkout
         run: |
-          ls -la /home/runner/
+          ls -la /home/runner/work/
+          ls -la /home/runner/work/human-sensing/
   
       - uses: actions/checkout@v2
           
     
             
       - name: create user changes
-        run: ls -la /home/runner/human-sensing/
+        run: ls -la /home/runner/work/human-sensing/
       #      ls -la
       #      touch test.txt
              

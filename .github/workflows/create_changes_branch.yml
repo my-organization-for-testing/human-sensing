@@ -11,7 +11,6 @@ on:
 jobs:
   update_code:
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
     
       - uses: actions/checkout@v2
@@ -26,15 +25,13 @@ jobs:
             cd speech
             mkdir -p ../test/
             mv -v ./*.* ../test/ 2>/dev/null || :
+            rm -rf ../speech/
+            
+            
           
       - uses: actions/checkout@v2
-        with:
-          path: human-sensing
-          
-      - name: Create branch
-        run: |
-            cd human-sensing
-     #       git branch ${{ github.event.client_payload.branch_name }}
+   
+ 
             
       - name: checking the directory content
         run: ls
@@ -46,9 +43,8 @@ jobs:
             
       - name: copies user_changes folder
         run: |
-            mkdir -p ./human-sensing/user_changes/
-            mv -v ./test/* ./human-sensing/user_changes/
-            cd human-sensing
+            mkdir -p ./user_changes/
+            mv -v ./test/* ./user_changes/
             ls -la
             
      # - name: Commit changes
